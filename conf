@@ -22,9 +22,9 @@ bind r source-file ~/.tmux/conf \; display "Reloaded!"
 # shorten command delay
 set -sg escape-time 1
 
-# # ------------------------
-# # Windows
-# # ------------------------
+# ------------------------
+# Windows
+# ------------------------
 
 # # use PREFIX | to split window horizontally and PREFIX - to split vertically
 bind | split-window -h
@@ -41,18 +41,21 @@ setw -g pane-base-index 1
 bind-key C-s command-prompt -p "host" "new-window -n %1 'ssh %1'"
 
 
-# # ------------------------
-# # Copy Mode
-# # ------------------------
+# ------------------------
+# Copy Mode
+# ------------------------
 
-# # set scrollback history to 10000 (10k)
+# set scrollback history to 10000 (10k)
 set -g history-limit 10000
 
-# # upward mouse scroll initiates copy-mode
+# upward mouse scroll initiates copy-mode
 set-option -g mouse on
 set -s escape-time 0
 
-# # provide access to the clipboard for pbpaste, pbcopy
+# copy to clipboard
+# tmux save-buffer - | xclip -selection clipboard
+
+# provide access to the clipboard for pbpaste, pbcopy
 #set-option -g default-command "reattach-to-user-namespace -l zsh"
 #set-window-option -g automatic-rename on
 
@@ -77,8 +80,8 @@ set-option -g message-fg brightred #orange
 set-option -g status on                # turn the status bar on
 set -g status-utf8 on                  # set utf-8 for the status bar
 set -g status-interval 5               # set update frequencey (default 15 seconds)
-set -g status-justify centre           # center window list for clarity
-# set-option -g status-position top    # position the status bar at top of screen
+#set -g status-justify centre           # center window list for clarity
+#set-option -g status-position top    # position the status bar at top of screen
 
 # visual notification of activity in other windows
 setw -g monitor-activity on
@@ -99,13 +102,14 @@ set-window-option -g window-status-current-bg colour236
 set-window-option -g window-status-current-attr bright
 
 # show host name and IP address on left side of status bar
-set -g status-left-length 70
-set -g status-left "#[fg=green]: #h : #[fg=brightblue]#(curl icanhazip.com) #[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
+#set -g status-left-length 20
+#set -g status-left "#[fg=green]: #h : #[fg=brightblue]#(curl icanhazip.com) #[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') "
 
 # show session name, window & pane number, date and time on right side of
 # status bar
-set -g status-right-length 60
-set -g status-right "#[fg=blue]#S #I:#P #[fg=yellow]:: %d %b %Y #[fg=green]:: %l:%M %p"
+set -g status-right-length 45
+set -g status-right "#[fg=yellow]:: %d %b %Y #[fg=green]:: %l:%M %p"
+#set -g status-right "#[fg=green]: #h : #[fg=brightblue]#(curl icanhazip.com) #[fg=yellow]#(ifconfig en0 | grep 'inet ' | awk '{print \"en0 \" $2}') #(ifconfig en1 | grep 'inet ' | awk '{print \"en1 \" $2}') #[fg=red]#(ifconfig tun0 | grep 'inet ' | awk '{print \"vpn \" $2}') [fg=yellow]: #S #I:#P"# #[fg=yellow]:: %d %b %Y #[fg=green]:: %l:%M %p"
 
 
 # # --------------------
